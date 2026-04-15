@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureForum | {% block title %}Home{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+
+  <nav>
+    <a class="brand" href="/">
+      <span class="brand-icon">S</span>
+      SecureForum
+    </a>
+    <div class="nav-links">
+      <a href="/comments">Forum</a>
+      {% if user %}
+        <a href="/profile?id={{ session.get('user_id', '') }}">Profile</a>
+        <a href="/logout" class="nav-logout">Sign out</a>
+      {% else %}
+        <a href="/login" class="nav-cta">Sign in</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="brand-sm">SecureForum</span>
+      <span>Built for educational purposes only. Do not deploy publicly.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<div class="profile-wrap">
+
+  <div class="profile-card">
+    <div class="profile-avatar">{{ profile['username'][0] | upper }}</div>
+    <div class="profile-info">
+      <h2>{{ profile['username'] }}</h2>
+      <span class="role-pill {{ profile['role'] }}">{{ profile['role'] }}</span>
+    </div>
+  </div>
+
+  <div class="profile-details">
+    <div class="detail-row">
+      <span class="detail-label">User ID</span>
+      <span class="detail-value mono">{{ profile['id'] }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Username</span>
+      <span class="detail-value">{{ profile['username'] }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Role</span>
+      <span class="detail-value">{{ profile['role'] }}</span>
+    </div>
+    <div class="detail-row highlight">
+      <span class="detail-label">Private Note</span>
+      <!-- VULNERABLE: shown to any authenticated user -->
+      <span class="detail-value mono">{{ profile['private_note'] }}</span>
+    </div>
+  </div>
+
+  <div class="profile-nav">
+    <a href="/profile?id={{ profile['id'] | int - 1 }}" class="btn-ghost">Previous user</a>
+    <a href="/profile?id={{ profile['id'] | int + 1 }}" class="btn-ghost">Next user</a>
+  </div>
+
+  <p class="page-sub" style="margin-top:12px;">
+    Hint: Try changing the <span class="mono">id</span> parameter in the URL.
+  </p>
+
+</div>
+{% endblock %}

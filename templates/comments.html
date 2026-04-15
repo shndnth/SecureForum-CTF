@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Forum{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div>
+    <h2>Community Forum</h2>
+    <p class="page-sub">This forum renders posts exactly as submitted. Be creative.</p>
+  </div>
+  {% if user %}
+    <span class="badge">Signed in as <strong>{{ user }}</strong></span>
+  {% endif %}
+</div>
+
+<div class="forum-layout">
+
+  {% if user %}
+  <div class="post-box">
+    <h4>Leave a comment</h4>
+    <form method="POST">
+      <textarea name="content" rows="4" placeholder="Write something..." required></textarea>
+      <button type="submit" class="btn-primary">Post</button>
+    </form>
+  </div>
+  {% else %}
+  <div class="post-box muted">
+    <p><a href="/login">Sign in</a> to leave a comment.</p>
+  </div>
+  {% endif %}
+
+  <div class="comments-feed">
+    <h4>{{ comments | length }} post{% if comments | length != 1 %}s{% endif %}</h4>
+    {% for c in comments %}
+    <div class="comment-card">
+      <div class="comment-meta">
+        <span class="comment-author">{{ c['author'] }}</span>
+        <span class="comment-id mono">#{{ c['id'] }}</span>
+      </div>
+      <!-- VULNERABLE: | safe disables HTML escaping -->
+      <div class="comment-body">{{ c['content'] | safe }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

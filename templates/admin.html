@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+
+<div class="admin-header">
+  <div class="admin-badge">ADMIN</div>
+  <h2>Control Panel</h2>
+  <p>You accessed this page without any credentials. That is the vulnerability.</p>
+</div>
+
+<div class="flag-strip">
+  <span class="flag-label mono">Flag 03</span>
+  <span class="flag-value mono">FLAG{br0k3n_4cc3ss_c0ntr0l}</span>
+</div>
+
+<div class="admin-section">
+  <h4>Registered Users</h4>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td class="mono">{{ u['id'] }}</td>
+        <td>{{ u['username'] }}</td>
+        <td><span class="role-pill {{ u['role'] }}">{{ u['role'] }}</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

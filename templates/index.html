@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-label">Community Security Forum</p>
+    <h1>Talk security.<br>Share knowledge.<br>Stay sharp.</h1>
+    <p class="hero-sub">A place for security researchers to discuss vulnerabilities, tools, and techniques. No fluff, just signal.</p>
+    {% if user %}
+      <div class="hero-actions">
+        <a class="btn-primary" href="/comments">Go to Forum</a>
+        <a class="btn-ghost" href="/profile?id={{ session.get('user_id', '') }}">My Profile</a>
+      </div>
+    {% else %}
+      <div class="hero-actions">
+        <a class="btn-primary" href="/login">Sign in</a>
+        <a class="btn-ghost" href="/comments">Browse Forum</a>
+      </div>
+    {% endif %}
+  </div>
+  <div class="hero-visual">
+    <div class="terminal-card">
+      <div class="terminal-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">session.log</span>
+      </div>
+      <div class="terminal-body">
+        <p><span class="t-dim">[INFO]</span> Auth module loaded</p>
+        <p><span class="t-dim">[INFO]</span> User session started</p>
+        <p><span class="t-warn">[WARN]</span> Unparameterized query detected</p>
+        <p><span class="t-dim">[INFO]</span> Comment posted to /forum</p>
+        <p><span class="t-err">[ERR]</span>  Access control check skipped</p>
+        <p><span class="t-dim">[INFO]</span> Profile fetched: id=<span class="t-amber">2</span></p>
+        <p class="blink-line"><span class="t-dim">$</span> _</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature-card">
+    <div class="feature-num">01</div>
+    <h3>Open Forum</h3>
+    <p>Post comments, share writeups and discuss findings with the community.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-num">02</div>
+    <h3>User Profiles</h3>
+    <p>Browse researcher profiles and their public notes.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-num">03</div>
+    <h3>Research Hub</h3>
+    <p>Dig into vulnerabilities. Something here is not quite right.</p>
+  </div>
+</section>
+
+{% endblock %}
